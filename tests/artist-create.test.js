@@ -10,6 +10,8 @@ describe("create artist", () => {
           genre: "rock",
         });
 
+        console.log("response:", status, body);
+
         expect(status).to.equal(201);
         expect(body.name).to.equal("Tame impala");
         expect(body.genre).to.equal("rock");
