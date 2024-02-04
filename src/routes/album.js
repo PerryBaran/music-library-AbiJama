@@ -3,6 +3,6 @@ const albumController = require("../controllers/album");
 
 const albumRouter = express.Router();
 
-albumRouter.post("/", albumController.createAlbum);
+albumRouter.post("/:artistId/albums", albumController.createAlbum);
 
 module.exports = albumRouter;
