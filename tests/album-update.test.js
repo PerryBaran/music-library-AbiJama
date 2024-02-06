@@ -9,7 +9,7 @@ describe("Update Album", () => {
   beforeEach(async () => {
     const { rows } = await db.query(
       "INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *",
-      ["Tame Impala", "rock"]
+      ["", ""]
     );
 
     artist = rows[0];
@@ -26,14 +26,15 @@ describe("Update Album", () => {
     it("replaces the album and returns the updated record", async () => {
       const { status, body } = await request(app)
         .put(`/albums/${album.id}`)
-        .send({ name: "something different", year: "different year" });
+        .send({ name: "thriller", year: "1982" });
 
       expect(status).to.equal(200);
 
       expect(body).to.deep.equal({
         id: album.id,
-        name: "something different",
-        year: "different year",
+        name: "thriller",
+        year: "1982",
+        artistid: artist.id,
       });
     });
   });
